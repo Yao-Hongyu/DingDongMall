@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingdong.mall.mappers.mapperExtension.UserShoppingOrderMapperExtension">
+
+    <resultMap id="UserShoppingOrderMap" type="com.dingdong.mall.vo.UserShoppingOrderVo">
+        <id property="id" column="id"/>
+        <result property="userId" column="userId"/>
+        <result property="consignee" column="consignee"/>
+        <result property="phoneNumber" column="phoneNumber"/>
+        <result property="address" column="address"/>
+        <result property="detailedAddress" column="detailedAddress"/>
+        <result property="name" column="name"/>
+        <result property="subhead" column="subhead"/>
+        <result property="brand" column="brand"/>
+        <result property="category" column="category"/>
+        <result property="description" column="description"/>
+        <result property="price" column="price"/>
+        <result property="picture" column="picture"/>
+        <result property="amount" column="amount"/>
+        <result property="updateTime" column="updateTime"/>
+    </resultMap>
+
+    <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="UserShoppingOrderMap">
+        select user_shopping_order.id,
+               user_shopping_order.user_id,
+               user_address_list.consignee,
+               user_address_list.phoneNumber,
+               user_address_list.address,
+               user_address_list.detailed_address,
+               user_shopping_order.name,
+               user_shopping_order.subhead,
+               user_shopping_order.brand,
+               user_shopping_order.category,
+               user_shopping_order.description,
+               user_shopping_order.price,
+               user_shopping_order.picture,
+               user_shopping_order.amount,
+               user_shopping_order.updateTime
+        from user_shopping_order,user_address_list
+        where user_shopping_order.address_id = user_address_list.id
+        and user_shopping_order.user_id=#{userId}
+        order by user_shopping_order.id
+
+    </select>
+</mapper>

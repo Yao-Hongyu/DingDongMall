@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingdong.mall.mappers.mapperExtension.UserShoppingCartMapperExtension">
+    <resultMap id="ProductMap" type="com.dingdong.mall.vo.ProductVo">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="subhead" column="subhead"/>
+        <result property="brand" column="brand_name"/>
+        <result property="category" column="category_name"/>
+        <result property="description" column="description"/>
+        <result property="price" column="price"/>
+        <result property="picture" column="picture"/>
+    </resultMap>
+
+    <select id="selectAll" parameterType="java.lang.Integer" resultMap="ProductMap">
+        select product.id,
+               product.name,
+               product.subhead,
+               product_brand.brand_name,
+               product_category.category_name,
+               product.description,
+               product.price,
+               product.picture
+        from product,
+             product_brand,
+             product_category,
+             user_shopping_cart
+        where product.brand_id = product_brand.id
+          and product.category_id = product_category.id
+          and user_shopping_cart.user_id=#{userId}
+          and user_shopping_cart.product_id = product.id
+        order by product.id
+    </select>
+</mapper>

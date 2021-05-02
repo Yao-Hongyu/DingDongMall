@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingdong.mall.mappers.mapperExtension.UserMapperExtension">
+
+    <select id="findByUsername" parameterType="java.lang.String" resultType="com.dingdong.mall.vo.UserVo">
+        select user.id,user.username, user.password, role.role
+        from user,
+             user_role,
+             role
+        where user.id = user_role.user_id
+          and user_role.user_role = role.id
+          and user.username = #{username}
+    </select>
+
+</mapper>

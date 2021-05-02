@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: ddmall
+  profiles:
+    active: dev
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml,classpath:/mapperExtension/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: ddmall-admin-secret #JWT加解密使用的密钥
+  expiration: 60 #JWT的超期限时间(60*60*24*7)
+  tokenHead: 'DDMall'  #JWT负载中拿到开头

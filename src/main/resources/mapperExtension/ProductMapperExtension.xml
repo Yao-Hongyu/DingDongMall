@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingdong.mall.mappers.mapperExtension.ProductMapperExtension">
+
+    <resultMap id="ProductMap" type="com.dingdong.mall.vo.ProductVo">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="subhead" column="subhead"/>
+        <result property="brand" column="brand_name"/>
+        <result property="category" column="category_name"/>
+        <result property="description" column="description"/>
+        <result property="price" column="price"/>
+        <result property="picture" column="picture"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="ProductMap">
+        select product.id,
+               product.name,
+               product.subhead,
+               product_brand.brand_name,
+               product_category.category_name,
+               product.description,
+               product.price,
+               product.picture
+        from product,
+             product_brand,
+             product_category
+        where product.brand_id = product_brand.id
+          and product.category_id = product_category.id
+        order by product.id
+    </select>
+
+    <select id="selectByCategory" parameterType="java.lang.String" resultMap="ProductMap">
+        select product.id,
+               product.name,
+               product.subhead,
+               product_brand.brand_name,
+               product_category.category_name,
+               product.description,
+               product.price,
+               product.picture
+        from product,
+             product_brand,
+             product_category
+        where product_category.category_name = #{category}
+          and product.brand_id = product_brand.id
+          and product.category_id = product_category.id
+        order by product.id
+    </select>
+
+    <select id="selectByBrand" parameterType="java.lang.String" resultMap="ProductMap">
+        select product.id,
+               product.name,
+               product.subhead,
+               product_brand.brand_name,
+               product_category.category_name,
+               product.description,
+               product.price,
+               product.picture
+        from product,
+             product_brand,
+             product_category
+        where product_brand.brand_name = #{brand}
+          and product.brand_id = product_brand.id
+          and product.category_id = product_category.id
+        order by product.id
+    </select>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="ProductMap">
+        select product.id,
+               product.name,
+               product.subhead,
+               product_brand.brand_name,
+               product_category.category_name,
+               product.description,
+               product.price,
+               product.picture
+        from product,
+             product_brand,
+             product_category
+        where product.id = #{id}
+          and product.brand_id = product_brand.id
+          and product.category_id = product_category.id
+        order by product.id
+    </select>
+
+    <select id="selectByKeyword" parameterType="java.lang.String" resultMap="ProductMap">
+        select id,name,subhead,brand_name,category_name,description,price,picture
+        from
+        (select product.id,
+        product.name,
+        product.subhead,
+        product_brand.brand_name,
+        product_category.category_name,
+        product.description,
+        product.price,
+        product.picture
+        from product,
+        product_brand,
+        product_category
+        where product.brand_id = product_brand.id
+        and product.category_id = product_category.id) a
+        <where>
+            <if test="_parameter != null">
+                or name like concat(concat('%',#{keyword},'%'))
+            </if>
+            <if test="_parameter != null">
+                or subhead like concat(concat('%',#{keyword},'%'))
+            </if>
+            <if test="_parameter != null">
+                or brand_name like concat(concat('%',#{keyword},'%'))
+            </if>
+            <if test="_parameter != null">
+                or category_name like concat(concat('%',#{keyword},'%'))
+            </if>
+            <if test="_parameter != null">
+                or concat(brand_name,name) like concat(concat('%',#{keyword},'%'))
+            </if>
+            <if test="_parameter != null">
+                or concat(brand_name,category_name) like concat(concat('%',#{keyword},'%'))
+            </if>
+        </where>
+        order by id
+    </select>
+
+</mapper>

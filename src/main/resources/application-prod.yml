@@ -1,0 +1,23 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /ddmall
+log4j:
+  appender:
+    console:
+      encoding: UTF-8
+spring:
+  jackson:
+    time-zone: GMT+8
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.17.0.1:3306/ddmall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123233
+  redis:
+    host: 172.17.0.4
+    port: 6379
+    password: 123233
+logging:
+  level:
+    com.dingdong.mall.mappers: debug
