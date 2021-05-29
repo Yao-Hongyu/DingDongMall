@@ -26,6 +26,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Web接口访问日志类
+ */
 @Aspect
 @Component
 @Order(1)

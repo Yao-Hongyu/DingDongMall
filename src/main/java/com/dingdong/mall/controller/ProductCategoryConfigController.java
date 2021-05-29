@@ -11,39 +11,48 @@ import com.dingdong.mall.dto.productCategory.RemoveProductCategoryParam;
 import com.dingdong.mall.dto.productCategory.UpdateProductCategoryParam;
 import com.dingdong.mall.service.ProductBrandConfigService;
 import com.dingdong.mall.service.ProductCategoryConfigService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 商品类别配置Controller
+ */
 @Controller
 @CrossOrigin("*")
 @RequestMapping("/admin/config/productCategory")
+@Api(tags = "ProductCategoryConfigController")
 public class ProductCategoryConfigController {
 
     @Autowired
     private ProductCategoryConfigService productCategoryConfigService;
 
-    @RequestMapping(method = RequestMethod.POST,value = "/add",produces = "application/json;charset=UTF-8")
+    @ApiOperation("添加商品类别")
+    @RequestMapping(method = RequestMethod.POST, value = "/add", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public CommonResult addProductCategory(@RequestBody AddProductCategoryParam param){
+    public CommonResult addProductCategory(@RequestBody AddProductCategoryParam param) {
         ProductCategory productCategory = productCategoryConfigService.addProductCategory(param);
-        if (productCategory==null) return CommonResult.failed();
+        if (productCategory == null) return CommonResult.failed();
         return CommonResult.success();
     }
 
-    @RequestMapping(method = RequestMethod.POST,value = "/remove",produces = "application/json;charset=UTF-8")
+    @ApiOperation("移除商品类别")
+    @RequestMapping(method = RequestMethod.POST, value = "/remove", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public CommonResult removeProductCategory(@RequestBody RemoveProductCategoryParam param){
+    public CommonResult removeProductCategory(@RequestBody RemoveProductCategoryParam param) {
         ProductCategory productCategory = productCategoryConfigService.removeProductCategory(param);
-        if (productCategory==null) return CommonResult.failed();
+        if (productCategory == null) return CommonResult.failed();
         return CommonResult.success();
     }
 
-    @RequestMapping(method = RequestMethod.POST,value = "/update",produces = "application/json;charset=UTF-8")
+    @ApiOperation("更新商品类别")
+    @RequestMapping(method = RequestMethod.POST, value = "/update", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public CommonResult updateProductCategory(@RequestBody UpdateProductCategoryParam param){
+    public CommonResult updateProductCategory(@RequestBody UpdateProductCategoryParam param) {
         ProductCategory productCategory = productCategoryConfigService.updateProductCategory(param);
-        if (productCategory==null) return CommonResult.failed();
+        if (productCategory == null) return CommonResult.failed();
         return CommonResult.success();
     }
 }

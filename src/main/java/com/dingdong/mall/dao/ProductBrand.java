@@ -1,8 +1,6 @@
 package com.dingdong.mall.dao;
 
-import java.io.Serializable;
-
-public class ProductBrand implements Serializable {
+public class ProductBrand {
     private Integer id;
 
     private String brandName;

@@ -22,6 +22,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Redis 缓存配置类
+ */
 @Configuration
 @EnableCaching
 public class RedisCacheConfig extends CachingConfigurerSupport {

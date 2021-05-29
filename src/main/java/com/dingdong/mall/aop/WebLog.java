@@ -2,6 +2,9 @@ package com.dingdong.mall.aop;
 
 import lombok.Data;
 
+/**
+ * Web日志类
+ */
 @Data
 public class WebLog {
     /**

@@ -1,8 +1,6 @@
 package com.dingdong.mall.dao;
 
-import java.io.Serializable;
-
-public class UserAddressList implements Serializable {
+public class UserAddressList {
     private Integer id;
 
     private Integer userId;

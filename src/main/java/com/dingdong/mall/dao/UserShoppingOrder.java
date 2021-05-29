@@ -1,9 +1,8 @@
 package com.dingdong.mall.dao;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class UserShoppingOrder implements Serializable {
+public class UserShoppingOrder {
     private Integer id;
 
     private Integer userId;
